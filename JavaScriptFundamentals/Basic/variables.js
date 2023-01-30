@@ -1,0 +1,26 @@
+let ourPlanetName = "Earth";
+let currentUserName = "John";
+
+alert(ourPlanetName);
+alert( `Hello, ${currentUserName}!` );
+
+const bigInt = 1234567890123456789012345678901234567890n;
+
+typeof undefined // "undefined"
+
+typeof 0 // "number"
+
+typeof 10n // "bigint"
+
+typeof true // "boolean"
+
+typeof "foo" // "string"
+
+typeof Symbol("id") // "symbol"
+
+typeof Math // "object"  (1)
+
+typeof null // "object"  (2)
+
+typeof alert // "function"  (3)
+
