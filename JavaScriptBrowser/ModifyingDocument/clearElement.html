@@ -1,0 +1,25 @@
+<ol id="elem">
+    <li>Hello</li>
+    <li>World</li>
+</ol>
+
+<script>
+    function clear(elem) {
+        let lis = elem.querySelectorAll('li');
+        for (const li of lis) {
+            li.remove();
+        }
+    }
+
+    function clearWhile(elem) {
+        while (elem.firstChild) {
+            elem.firstChild.remove();
+        }
+    }
+    
+    function clearSimple(elem) {
+        elem.innerHTML = '';
+    }
+
+    clear(elem); // clears the list
+</script>

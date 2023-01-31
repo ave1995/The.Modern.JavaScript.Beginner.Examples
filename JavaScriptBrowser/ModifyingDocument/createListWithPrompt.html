@@ -1,0 +1,19 @@
+<ul id="elem">
+</ul>
+
+<script>
+    let elem = document.getElementById('elem')
+    while (true) {
+        let data = prompt("Give me <li>...", "");
+
+        if (!data) {
+            break;
+        }
+
+        let liAppend = document.createElement('li');
+        //liAppend.innerHTML = data;
+        liAppend.textContent = data;
+        elem.append(liAppend);
+    }
+
+</script>

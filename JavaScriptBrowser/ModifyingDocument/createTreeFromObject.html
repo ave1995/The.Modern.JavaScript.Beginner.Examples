@@ -1,0 +1,90 @@
+<div id="container"></div>
+
+<script>
+    let data = {
+        "Fish": {
+            "trout": {},
+            "salmon": {}
+        },
+
+        "Tree": {
+            "Huge": {
+                "sequoia": {},
+                "oak": {}
+            },
+            "Flowering": {
+                "apple tree": {},
+                "magnolia": {}
+            }
+        }
+    };
+
+    let container = document.getElementById('container');
+    createTree(container, data); // creates the tree in the container
+
+    function createTree(container, data) {
+        Object.entries(data).forEach(([key, value]) => {
+            if (container.tagName !== "UL") {
+                let ul = document.createElement('ul');
+                container.append(ul);
+                container = ul;
+            }
+            let li = document.createElement('li');
+           
+            li.innerHTML = key;
+            if (value != null) {
+                createTree(li, value)
+            }
+            
+            container.append(li);
+        });
+    }
+
+</script>
+
+<script>
+    function createTreeInnerHtml(container, obj) {
+      container.innerHTML = createTreeText(obj);
+    }
+
+    function createTreeText(obj) { // standalone recursive function
+      let li = '';
+      let ul;
+      for (let key in obj) {
+        li += '<li>' + key + createTreeText(obj[key]) + '</li>';
+      }
+      if (li) {
+        ul = '<ul>' + li + '</ul>'
+      }
+      return ul || '';
+    }
+
+  </script>
+
+<script>
+    function createTreeTheirSolution(container, obj) {
+      container.append(createTreeDom(obj));
+    }
+
+    function createTreeDom(obj) {
+      // if there's no children, then the call returns undefined
+      // and the <ul> won't be created
+      if (!Object.keys(obj).length) return;
+
+      let ul = document.createElement('ul');
+
+      for (let key in obj) {
+        let li = document.createElement('li');
+        li.innerHTML = key;
+
+        let childrenUl = createTreeDom(obj[key]);
+        if (childrenUl) {
+          li.append(childrenUl);
+        }
+
+        ul.append(li);
+      }
+
+      return ul;
+    }
+  </script>
