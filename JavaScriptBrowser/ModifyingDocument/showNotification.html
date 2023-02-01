@@ -1,0 +1,33 @@
+<body>
+
+</body>
+
+<script>
+    
+
+    function showNotification({top, right, html, className}) {
+        let divNotification = document.createElement('div');
+        divNotification.className = 'notification';
+        divNotification.classList.add(className);
+
+
+        divNotification.style.top = top + 'px';
+        divNotification.style.right = right + 'px';
+        divNotification.innerHTML = html;
+
+        document.body.append(divNotification);
+
+        setTimeout(() => divNotification.remove(), 1000); 
+    }
+
+    let i = 1;
+    setInterval(() => {
+        showNotification({
+        top: 10, // 10px from the top of the window (by default 0px)
+        right: 10, // 10px from the right edge of the window (by default 0px)
+        html: "Hello!" + i++, // the HTML of notification
+        className: "welcome" // an additional class for the div (optional)
+    });
+    }, 2000);
+
+</script>
