@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="windowsCoordinates.css">
+  <script>
+    document.onclick = function (e) { // shows click coordinates
+      coords.innerHTML = e.clientX + ':' + e.clientY;
+    };
+  </script>
+</head>
+
+<body>
+
+  Click anywhere to get window coordinates.
+  <br> That's for testing, to check the result you get by JavaScript.
+  <br>
+  <div id="coords">(click coordinates show up here)</div>
+
+
+  <div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  </div>
+
+
+  <div class="triangle-right" style="left:-20px;top:-176px">1</div>
+  <div class="triangle-right" style="left:-10px;top:-178px">3</div>
+  <div class="triangle-right" style="left:190px;top:-40px">4</div>
+  <div class="triangle-right" style="left:200px;top:-42px">2</div>
+
+
+  <script>
+    let field = document.getElementById('field');
+
+    let fieldBorder = (field.getBoundingClientRect().right - field.clientWidth - field.getBoundingClientRect().x) / 2 != 0 ? (field.getBoundingClientRect().right - field.clientWidth - field.getBoundingClientRect().x) / 2 : 0;
+
+    console.log('1 x:' + field.getBoundingClientRect().x
+      + ' y:' + field.getBoundingClientRect().y);
+
+    console.log('3 x:' + (field.getBoundingClientRect().x + fieldBorder)
+      + ' y:' + (field.getBoundingClientRect().y + fieldBorder));
+
+    console.log('4 x:' + (field.getBoundingClientRect().right - fieldBorder)
+      + ' y:' + (field.getBoundingClientRect().bottom - fieldBorder));
+
+    console.log('2 x:' + field.getBoundingClientRect().right
+      + ' y:' + field.getBoundingClientRect().bottom);
+
+    //
+    let coords = elem.getBoundingClientRect();
+
+    let answer1 = [coords.left, coords.top];
+    let answer2 = [coords.right, coords.bottom];
+    //
+    let answer4 = [
+      coords.left + elem.clientLeft + elem.clientWidth,
+      coords.top + elem.clientTop + elem.clientHeight
+    ];
+    //
+    let answer3 = [coords.left + field.clientLeft, coords.top + field.clientTop];
+  </script>
+
+</body>
+
+</html>
