@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <input type="button" id="hider" value="Click to hide/unhide the text" />
+
+    <div id="text">Text</div>
+
+    <input type="button" id="hideself" value="Hide self" onclick="this.hidden=true"/>
+
+    <script>
+        let buttonHider = document.getElementById('hider');
+        buttonHider.addEventListener('click', () => {
+            let text = document.getElementById('text');
+            text.hidden = !text.hidden;
+        });
+    </script>
+
+</body>
+
+</html>

@@ -44,29 +44,35 @@
         case 'top':
           elem.style.left = coordsAnchor.left + 'px';
           elem.style.top = (coordsAnchor.top - elem.offsetHeight) + 'px';
+          elem.setAttribute('kind', position);
           break;
         case 'right':
           elem.style.left = coordsAnchor.right + 'px';
           elem.style.top = coordsAnchor.top + 'px';
+          elem.setAttribute('kind', position);
           break;
         case 'bottom':
           elem.style.left = coordsAnchor.left + 'px';
           elem.style.top = coordsAnchor.bottom + 'px';
+          elem.setAttribute('kind', position);
           break;
         case 'top-out':
           elem.style.left = coordsAnchor.left + 'px';
           elem.style.top = (coordsAnchor.top - elem.offsetHeight) + 'px';
           elem.style.position = 'absolute';
+          elem.setAttribute('kind', position);
           break;
         case 'right-out':
           elem.style.left = coordsAnchor.right + 'px';
           elem.style.top = coordsAnchor.top + 'px';
           elem.style.position = 'absolute';
+          elem.setAttribute('kind', position);
           break;
         case 'bottom-out':
           elem.style.left = coordsAnchor.left + 'px';
           elem.style.top = coordsAnchor.bottom + 'px';
           elem.style.position = 'absolute';
+          elem.setAttribute('kind', position);
           break;
         default:
           break;
@@ -104,15 +110,26 @@
       positionAt(anchor, position, note);
     }
 
+
+    function positionNotesRight(anchor) {
+      let notes = document.querySelectorAll('.note');
+
+      notes.forEach((n) => positionAt(anchor, n.getAttribute('kind'), n));
+    }
     // test it
     let blockquote = document.querySelector('blockquote');
 
-    showNote(blockquote, "top", "note above");
-    showNote(blockquote, "right", "note at the right");
-    showNote(blockquote, "bottom", "note below");
+    // showNote(blockquote, "top", "note above");
+    // showNote(blockquote, "right", "note at the right");
+    // showNote(blockquote, "bottom", "note below");
     showNote(blockquote, "top-out", "note top-out");
     showNote(blockquote, "right-out", "note right-out");
     showNote(blockquote, "bottom-out", "note bottom-out");
+
+
+    // Dunno if "resize" is best. I don't know what the "change zoom" event would be
+    window.visualViewport.addEventListener("resize", () => positionNotesRight(blockquote));
+
   </script>
 
 
