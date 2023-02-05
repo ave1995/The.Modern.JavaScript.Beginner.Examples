@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        .selected {
+            background: #0f0;
+        }
+
+        li {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    Click on a list item to select it.
+    <br>
+
+    <ul id="ul">
+        <li>Christopher Robin</li>
+        <li>Winnie-the-Pooh</li>
+        <li>Tigger</li>
+        <li>Kanga</li>
+        <li>Rabbit. Just rabbit.</li>
+    </ul>
+
+
+
+
+    <script>
+        ul.onclick = function (event) {
+            if (event.target.tagName != "LI") return;
+
+            if (event.ctrlKey || event.metaKey) {
+                toggleSelect(event.target);
+            } else {
+                singleSelect(event.target);
+            }
+
+        }
+
+        // prevent unneeded selection of list elements on clicks
+        ul.onmousedown = function () {
+            return false;
+        };
+
+        function toggleSelect(li) {
+            li.classList.toggle('selected');
+        }
+
+        function singleSelect(li) {
+            let selected = ul.querySelectorAll('.selected');
+            for (let elem of selected) {
+                elem.classList.remove('selected');
+            }
+            li.classList.add('selected');
+        }
+
+    </script>
+
+    <!-- <script>
+    class Menu {
+        handleEvent(event) {
+            let method = 'on' + event.type[0].toUpperCase() + event.type.slice(1);
+            method += event.ctrlKey ? 'Ctrl' : '';
+            this[method](event);
+        }
+
+        onClick() {
+            let li = event.target.closest('li');
+            if (li.children.length == 0) {
+                let span = document.createElement('span');
+                span.className = 'selected';
+                event.target.prepend(span);
+                span.append(span.nextSibling);
+            }
+
+            let spans = ul.querySelectorAll('span');
+            spans.forEach(span => {
+                let parent = span.parentElement;
+                if (parent != li) {
+                    parent.prepend(span.firstChild);
+                    span.remove();
+                }
+            });
+        }
+
+        onClickCtrl() {
+            let li = event.target.closest('li');
+            if (li.children.length == 0) {
+                let span = document.createElement('span');
+                span.className = 'selected';
+                event.target.prepend(span);
+                span.append(span.nextSibling);
+            }
+            else {
+                li.prepend(li.children[0].firstChild);
+                li.children[0].remove();
+            }
+        }
+    }
+
+    let menu = new Menu();
+    ul.addEventListener('click', menu);
+</script> -->
+</body>
+
+</html>
