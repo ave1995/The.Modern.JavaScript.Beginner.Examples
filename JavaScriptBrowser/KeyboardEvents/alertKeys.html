@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+
+<body>
+
+</body>
+<script>
+    function runOnKeys(func, ...keys) {
+        let keysDown = new Set();
+        document.addEventListener('keydown', function (event) {
+            keysDown.add(event.code);
+            if (keys.toString() === Array.from(keysDown).toString()) {
+                keysDown.clear();
+                func();
+            }
+        });
+
+        document.addEventListener('keyup', function (event) {
+            keysDown.delete(event.code);
+        });
+    }
+
+    runOnKeys(() => alert("Hello!"), "KeyQ", "KeyW");
+</script>
+
+</html>
