@@ -1,0 +1,24 @@
+<!doctype html>
+<div>
+    <textarea style="width:200px; height: 60px;" id="area"></textarea>
+</div>
+
+<button id="clear">Clear</button>
+
+<script>
+    let area = document.getElementById("area");
+    let keyArea = "area";
+
+    area.value = localStorage.getItem('area');
+    area.oninput = () => {
+      localStorage.setItem('area', area.value)
+    };
+
+    let clearButton = document.getElementById("clear");
+
+    clearButton.onclick = () => {
+        localStorage.removeItem(keyArea);
+        area.value = null;
+    }
+
+</script>
