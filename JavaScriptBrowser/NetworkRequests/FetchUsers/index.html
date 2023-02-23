@@ -1,0 +1,57 @@
+<!doctype html>
+<script src="https://en.js.cx/test/libs.js"></script>
+<script src="test.js"></script>
+<script>
+
+    async function getUsers(names) {
+        let users = [];
+
+        for (let name of names) {
+            let response = await fetch("https://api.github.com/users/" + name);
+            if (response.ok) { // if HTTP-status is 200-299
+                let user = await response.json();
+                users.push(user);
+            } else {
+                users.push(null);
+            }
+        }
+
+        let results = await Promise.all(users);
+        return results;
+    }
+    //faster
+    async function getUsersFaster(names) {
+        let jobs = [];
+
+        for (let name of names) {
+            let job = fetch(`https://api.github.com/users/${name}`).then(
+                successResponse => {
+                    if (successResponse.status != 200) {
+                        return null;
+                    } else {
+                        return successResponse.json();
+                    }
+                },
+                failResponse => {
+                    return null;
+                }
+            );
+            jobs.push(job);
+        }
+
+        let results = await Promise.all(jobs);
+
+        return results;
+    }
+
+    async function getUsersTwo(names) {
+        return await Promise.all(names.map(name => getUser(name)));
+    }
+
+    async function getUser(name) {
+        let result = await fetch(`https://api.github.com/users/${name}`);
+        return result.ok ? await result.json() : null;
+    }
+</script>
+
+</html>
